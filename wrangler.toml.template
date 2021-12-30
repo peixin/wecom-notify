@@ -1,0 +1,12 @@
+name = ""
+account_id = ""
+type = "javascript"
+usage_model = ''
+compatibility_flags = []
+workers_dev = true
+compatibility_date = ""
+
+[build]
+command = "yarn install && yarn build"
+[build.upload]
+format = "service-worker"
