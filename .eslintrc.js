@@ -6,6 +6,12 @@ module.exports = {
     serviceworker: true,
   },
   parser: "@typescript-eslint/parser",
+  globals: {
+    "WECOM_CROP_ID": "readonly",
+    "WECOM_SECRET": "readonly",
+    "TENCENT": "readonly",
+    "AGENT_ID": "readonly",
+  },
   parserOptions: {
     ecmaVersion: 12,
     sourceType: "module",
@@ -13,4 +19,5 @@ module.exports = {
   extends: ["standard", "plugin:prettier/recommended"],
   plugins: ["@typescript-eslint"],
   rules: {},
+  ignorePatterns: ["**/*.d.ts"],
 };

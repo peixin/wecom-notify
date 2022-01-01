@@ -36,5 +36,6 @@
   },
   "lint-staged": {
     "src/*.{js,ts,json}": "yarn lint"
-  }
+  },
+  "dependencies": {}
 }
