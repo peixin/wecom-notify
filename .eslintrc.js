@@ -9,8 +9,7 @@ module.exports = {
   globals: {
     "WECOM_CROP_ID": "readonly",
     "WECOM_SECRET": "readonly",
-    "TENCENT": "readonly",
-    "AGENT_ID": "readonly",
+    "TENCENT": "readonly"
   },
   parserOptions: {
     ecmaVersion: 12,

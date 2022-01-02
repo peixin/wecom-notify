@@ -13,7 +13,7 @@ interface TencentAccessToken {
   "expires_in": number;
 }
 
-export const getAccessToken = async () => {
+const getAccessToken = async () => {
   const token = await getAccessTokenFromCache();
   if (token) {
     return token;
@@ -42,7 +42,7 @@ export const getAccessToken = async () => {
   }
 };
 
-export const postMessage = async (text: string) => {
+export const postMessage = async (agentId: number, toUser: string, message: string) => {
   const token = await getAccessToken();
   if (!token) {
     return false;
@@ -52,11 +52,11 @@ export const postMessage = async (text: string) => {
   headers.append("Content-Type", "application/json");
 
   const payload = {
-    "touser": "liupeixin",
+    "touser": toUser,
     "msgtype": "text",
-    "agentid": AGENT_ID,
+    "agentid": agentId,
     "text": {
-      "content": text,
+      "content": message,
     },
     "safe": 0,
     "enable_id_trans": 0,
@@ -75,6 +75,7 @@ export const postMessage = async (text: string) => {
     requestOptions
   );
 
-  console.log(response);
+  console.log(response.status);
+  console.log(await response.json());
   return response.ok;
 };
