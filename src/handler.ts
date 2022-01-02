@@ -1,18 +1,26 @@
 import { postMessage } from "./wecom";
 
-const getParameter = (searchParams: URLSearchParams, parameterName: string, defaultValue = "") => {
-  return (searchParams.get(parameterName) || defaultValue).trim();
-};
+const bodyFormat = '{ "agentId": number, "message": string, "toUser": string }';
 
 export async function handleRequest(request: Request): Promise<Response> {
-  const { searchParams } = new URL(request.url);
+  if (request.method.toUpperCase() !== "POST") {
+    return new Response(`Need POST method body in json format: ${bodyFormat}`, { status: 405 });
+  }
 
-  const agentId = parseInt(getParameter(searchParams, "agent-id"));
-  const message = decodeURIComponent(getParameter(searchParams, "message"));
-  const toUser = getParameter(searchParams, "to-user");
+  let bodyJSON = null;
 
-  if (!agentId || !message || !toUser.length) {
-    return new Response("need url parameters: [agent-id, message, to-user]", { status: 400 });
+  try {
+    bodyJSON = JSON.parse(await request.text());
+  } catch {
+    return new Response(`Get and parse body error: need body in json format: ${bodyFormat}`, {
+      status: 400,
+    });
+  }
+
+  const { agentId, message, toUser } = bodyJSON;
+
+  if (!agentId || !message || !toUser) {
+    return new Response(`Need body in json format: ${bodyFormat}`, { status: 400 });
   }
 
   const isOK = await postMessage(agentId, toUser, message);
