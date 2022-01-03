@@ -7,6 +7,17 @@ workers_dev = true
 compatibility_date = ""
 
 [build]
-command = "yarn install && yarn build"
+command = "yarn build"
 [build.upload]
 format = "service-worker"
+
+[[kv_namespaces]]
+binding = "TENCENT"
+preview_id = ""
+id = ""
+
+[vars]
+API_KEY_EXPIRES = 3600
+
+[dev]
+port = 8787

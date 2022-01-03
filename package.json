@@ -9,7 +9,7 @@
   "scripts": {
     "build": "webpack",
     "lint": "eslint src --fix --ext .ts",
-    "prebuild": "rm -rf dist",
+    "prebuild": "rm -rf dist/*",
     "prepare": "husky install"
   },
   "devDependencies": {

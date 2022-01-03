@@ -1,3 +1,5 @@
+import { Message, TencentAccessToken } from "./types";
+
 const getAccessTokenFromCache = async () => {
   try {
     const token = await TENCENT.get("breeze_token", { type: "text" });
@@ -7,11 +9,6 @@ const getAccessTokenFromCache = async () => {
     return null;
   }
 };
-
-interface TencentAccessToken {
-  "access_token": string;
-  "expires_in": number;
-}
 
 const getAccessToken = async () => {
   const token = await getAccessTokenFromCache();
@@ -42,7 +39,7 @@ const getAccessToken = async () => {
   }
 };
 
-export const postMessage = async (agentId: number, toUser: string, message: string) => {
+export const postMessage = async ({ agentId, toUser, content }: Message) => {
   const token = await getAccessToken();
   if (!token) {
     return false;
@@ -56,7 +53,7 @@ export const postMessage = async (agentId: number, toUser: string, message: stri
     "msgtype": "text",
     "agentid": agentId,
     "text": {
-      "content": message,
+      "content": content,
     },
     "safe": 0,
     "enable_id_trans": 0,
