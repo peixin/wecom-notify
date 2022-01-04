@@ -1,4 +1,4 @@
-import { Message, TencentAccessToken } from "./types";
+import { Message, TencentAccessToken } from "@/types";
 
 const getAccessTokenFromCache = async () => {
   try {

@@ -10,6 +10,9 @@ module.exports = {
   mode: "development",
   resolve: {
     extensions: [".ts"],
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
   },
   module: {
     rules: [

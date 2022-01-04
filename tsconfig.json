@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./dist",
     "module": "COMMONJS",
     "target": "ESNext",
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "alwaysStrict": true,
     "strict": true,
     "preserveConstEnums": true,
@@ -12,8 +15,19 @@
     "esModuleInterop": true,
     "types": [
       "@cloudflare/workers-types"
-    ]
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "test"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ]
 }

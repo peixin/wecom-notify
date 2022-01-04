@@ -1,6 +1,6 @@
-import { MessagePayload } from "./types";
-import { postMessage } from "./wecom";
-import * as crypto from "./crypto";
+import { MessagePayload } from "@/types";
+import { postMessage } from "@/wecom";
+import * as crypto from "@/crypto";
 
 const bodyFormat =
   '{message: { "agentId": number, "content": string, "toUser": string }, timestamp: number}';
@@ -31,8 +31,7 @@ export async function handleRequest(request: Request): Promise<Response> {
   }
 
   const now = Math.floor(new Date().getTime() / 1000);
-
-  if (timestamp + API_KEY_EXPIRES < now) {
+  if (!(timestamp - 10 < now && timestamp + Number(API_KEY_EXPIRES) > now)) {
     return new Response(`API-KEY is expired`, { status: 401 });
   }
 
