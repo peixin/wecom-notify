@@ -4,6 +4,7 @@ module.exports = {
     es6: true,
     node: true,
     serviceworker: true,
+    jest: true,
   },
   parser: "@typescript-eslint/parser",
   globals: {

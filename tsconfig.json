@@ -14,20 +14,25 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "types": [
-      "@cloudflare/workers-types"
+      "@cloudflare/workers-types",
+      "@types/jest",
+      "@types/service-worker-mock"
     ],
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@tests/*": [
+        "tests/*"
       ]
     },
   },
   "include": [
-    "src"
+    "src",
+    "tests",
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "test"
+    "dist"
   ]
 }
