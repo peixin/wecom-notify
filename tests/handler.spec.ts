@@ -2,7 +2,7 @@ import { handleRequest } from "@/handler";
 import * as validator from "@/validator";
 import * as wecom from "@/wecom";
 
-describe("handle", () => {
+describe("test handle", () => {
   beforeEach(() => {
     jest.resetModules();
   });

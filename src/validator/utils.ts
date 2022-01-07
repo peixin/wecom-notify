@@ -30,7 +30,8 @@ export const validateBody = (messagePayload: MessagePayload) => {
   }
 
   const now = Math.floor(new Date().getTime() / 1000);
-  if (!(timestamp - 10 < now && timestamp + Number(API_KEY_EXPIRES) > now)) {
+
+  if (Math.abs(now - timestamp) > Number(API_KEY_EXPIRES)) {
     return validateResult(false, utils.responseError(`API-KEY is expired`, 401));
   }
 
