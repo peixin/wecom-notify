@@ -17,7 +17,12 @@ preview_id = ""
 id = ""
 
 [vars]
-API_KEY_EXPIRES = 3600
+API_KEY_EXPIRES = 60
+CORS = true
+
+
+[env.production.vars]
+CORS = false
 
 [dev]
 port = 8787

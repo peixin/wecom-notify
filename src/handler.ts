@@ -1,6 +1,7 @@
 import { MessagePayload } from "@/types";
 import { postMessage } from "@/wecom";
 import * as validator from "@/validator";
+import * as utils from "@/utils";
 
 export async function handleRequest(request: Request): Promise<Response> {
   const { isValid, response } = await validator.validateRequest(request);
@@ -11,5 +12,6 @@ export async function handleRequest(request: Request): Promise<Response> {
 
   const { message } = JSON.parse(await request.text()) as MessagePayload;
   const isOK = await postMessage(message);
-  return new Response(`isOK: ${isOK}`);
+
+  return utils.responseSuccess(`isOK: ${isOK}`);
 }

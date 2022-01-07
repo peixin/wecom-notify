@@ -6,5 +6,6 @@ declare global {
   const WECOM_CROP_ID: string;
   const TENCENT: KVNamespace;
   const SECRET_KEY: string;
-  const API_KEY_EXPIRES: number;
+  const API_KEY_EXPIRES: string;
+  const CORS: string;
 }

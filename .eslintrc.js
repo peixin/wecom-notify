@@ -13,6 +13,7 @@ module.exports = {
     "TENCENT": "readonly",
     "SECRET_KEY": "readonly",
     "API_KEY_EXPIRES": "readonly",
+    "CORS": "readonly",
   },
   parserOptions: {
     ecmaVersion: 12,

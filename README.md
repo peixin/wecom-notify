@@ -25,3 +25,9 @@ curl -L -X POST "http://127.0.0.1:8787" \
     "timestamp": 1641224537
 }'
 ```
+
+### dev 
+`wrangler dev`
+
+### publish 
+`wrangler publish --env production`
