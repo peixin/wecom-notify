@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 16px;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    textarea {
+      width: 95%;
+      height: 30%;
+      margin-bottom: 1rem;
+      resize: none;
+    }
+  </style>
+  <script>
+    const secret = "secret";
+
+    const getPrivateKey = async (encoder, secret, keyUsages) => {
+      const secretKeyData = encoder.encode(secret);
+
+      return await crypto.subtle.importKey(
+        "raw",
+        secretKeyData,
+        { name: "HMAC", hash: "SHA-256" },
+        false,
+        keyUsages
+      );
+    };
+
+    const sign = async (secret, payload) => {
+      const encoder = new TextEncoder();
+      const key = await getPrivateKey(encoder, secret, ["sign"]);
+
+      const payloadText = encoder.encode(payload);
+
+      const signature = await crypto.subtle.sign("HMAC", key, payloadText);
+      const signatureStr = btoa(String.fromCharCode(...new Uint8Array(signature)));
+
+      return signatureStr;
+    };
+
+    const request = async (apiKey, body) => {
+      let headers = {
+        "API-KEY": apiKey,
+      };
+
+      return await fetch("http://localhost:8787", {
+        method: "POST",
+        body,
+        headers,
+      })
+        .then(response => response.text())
+        .catch(() => "error");
+    };
+
+    const test = async () => {
+      const payload = JSON.stringify({
+        message: {
+          "agentId": 1000001,
+          "toUser": "@all",
+          "content": "test 😄🚗 🇨🇳☯️",
+        },
+        timestamp: Math.floor(new Date().getTime() / 1000),
+      });
+
+      const signatureStr = await sign(secret, payload);
+
+      const outputs = [];
+      outputs.push(`payload: ${payload}`);
+      outputs.push(`signatureStr: ${signatureStr}`);
+      outputs.push("============ Request ============");
+      document.getElementById("output").value = outputs.join("\n\n");
+
+      const response = await request(signatureStr, payload);
+      outputs.push(response);
+      outputs.push("Done!");
+      document.getElementById("output").value = outputs.join("\n\n");
+    };
+  </script>
+</head>
+
+<body>
+  <textarea id="output" disabled resize="none"></textarea>
+  <button onclick="test()">Test</button>
+</body>
+
+</html>
