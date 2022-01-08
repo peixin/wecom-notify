@@ -1,6 +1,7 @@
 export interface Message {
   agentId: number;
   toUser: string;
+  messageType?: "text" | "markdown";
   content: string;
 }
 
