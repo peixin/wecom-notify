@@ -30,13 +30,16 @@ describe("test handle", () => {
       .spyOn(validator, "validateRequest")
       .mockResolvedValue({ isValid: true, response: undefined });
 
-    jest.spyOn(wecom, "postMessage").mockResolvedValue(true);
+    jest.spyOn(wecom, "postMessage").mockResolvedValue({
+      isOK: true,
+      message: "success",
+    });
 
     const request = new Request("/", { method: "POST", body: "{}" });
     const result = await handleRequest(request);
 
     expect(result.status).toEqual(200);
     const text = await result.text();
-    expect(text).toEqual("isOK: true");
+    expect(text).toEqual("Send message result: success");
   });
 });

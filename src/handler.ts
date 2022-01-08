@@ -11,7 +11,10 @@ export async function handleRequest(request: Request): Promise<Response> {
   }
 
   const { message } = JSON.parse(await request.text()) as MessagePayload;
-  const isOK = await postMessage(message);
-
-  return utils.responseSuccess(`isOK: ${isOK}`);
+  const result = await postMessage(message);
+  if (result.isOK) {
+    return utils.responseSuccess(`Send message result: ${result.message}`);
+  } else {
+    return utils.responseError(`Send message result: ${result.message}`);
+  }
 }

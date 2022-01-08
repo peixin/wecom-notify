@@ -7,12 +7,6 @@ const message: Message = {
   content: "hello",
 };
 
-const API_KEY_EXPIRES_MOCK = 10;
-
-Object.defineProperty(globalThis, "API_KEY_EXPIRES", {
-  value: String(API_KEY_EXPIRES_MOCK),
-});
-
 describe("test validate utils", () => {
   describe("test validate body", () => {
     beforeEach(() => {

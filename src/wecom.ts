@@ -39,10 +39,15 @@ const getAccessToken = async () => {
   }
 };
 
+const sendMessageResult = (isOK: boolean, message: string) => ({
+  isOK,
+  message,
+});
+
 export const postMessage = async ({ agentId, toUser, content }: Message) => {
   const token = await getAccessToken();
   if (!token) {
-    return false;
+    return sendMessageResult(false, "No TOKEN");
   }
 
   const headers = new Headers();
@@ -67,12 +72,19 @@ export const postMessage = async ({ agentId, toUser, content }: Message) => {
     body: JSON.stringify(payload),
   };
 
-  const response = await fetch(
-    `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${token}`,
-    requestOptions
-  );
+  try {
+    const response = await fetch(
+      `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${token}`,
+      requestOptions
+    );
 
-  console.log(response.status);
-  console.log(await response.json());
-  return response.ok;
+    const responseData = (await response.json()) as { errcode: number };
+    if (responseData.errcode !== 0) {
+      return sendMessageResult(false, JSON.stringify(responseData));
+    } else {
+      return sendMessageResult(true, "success");
+    }
+  } catch (error) {
+    return sendMessageResult(false, `fetch api error ${error}`);
+  }
 };
