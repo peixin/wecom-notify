@@ -8,4 +8,5 @@ declare global {
   const SECRET_KEY: string;
   const API_KEY_EXPIRES: string;
   const CORS: string;
+  const SECRET_KEY_USED_AS_API_KEY: string;
 }

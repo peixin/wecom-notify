@@ -14,6 +14,7 @@ module.exports = {
     "SECRET_KEY": "readonly",
     "API_KEY_EXPIRES": "readonly",
     "CORS": "readonly",
+    "SECRET_KEY_USED_AS_API_KEY": "readonly",
   },
   parserOptions: {
     ecmaVersion: 12,

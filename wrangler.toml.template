@@ -19,6 +19,7 @@ id = ""
 [vars]
 API_KEY_EXPIRES = 60
 CORS = true
+SECRET_KEY_USED_AS_API_KEY = false
 
 
 [env.production.vars]

@@ -47,7 +47,12 @@ export const validateBody = (messagePayload: MessagePayload) => {
 };
 
 export const validateAuthentication = async (messagePayload: MessagePayload, APIKey: string) => {
-  const verified = await crypto.verify(SECRET_KEY, JSON.stringify(messagePayload), APIKey);
+  let verified = false;
+  if (SECRET_KEY_USED_AS_API_KEY === "true") {
+    verified = SECRET_KEY === APIKey;
+  } else {
+    verified = await crypto.verify(SECRET_KEY, JSON.stringify(messagePayload), APIKey);
+  }
 
   if (!verified) {
     return validateResult(false, utils.responseError("Authentication failure", 401));
