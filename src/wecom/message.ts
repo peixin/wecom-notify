@@ -14,14 +14,14 @@ export class WecomMessage {
     if (isCustomMessage(this.isCustom, message)) {
       return message;
     } else {
-      if (!message.messageType) {
-        message.messageType = "text";
+      if (!message.msgtype) {
+        message.msgtype = "text";
       }
       return {
-        "touser": message.toUser,
-        "msgtype": message.messageType,
-        "agentid": message.agentId,
-        [message.messageType]: {
+        "touser": message.touser,
+        "msgtype": message.msgtype,
+        "agentid": message.agentid,
+        [message.msgtype]: {
           "content": message.content,
         },
         "safe": 0,

@@ -2,8 +2,8 @@ import { Message, MessagePayload } from "@/types";
 import { validateBody } from "@/validator/utils";
 
 const message: Message = {
-  agentId: 1000001,
-  toUser: "@all",
+  agentid: 1000001,
+  touser: "@all",
   content: "hello",
 };
 

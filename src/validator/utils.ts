@@ -3,7 +3,7 @@ import * as utils from "@/utils";
 import * as crypto from "@/crypto";
 
 export const bodyFormat =
-  '{message: { "agentId": number, "content": string, "toUser": string }, timestamp: number}';
+  '{message: { "agentid": number, "content": string, "touser": string }, timestamp: number}';
 
 export const validateResult = (isValid: boolean, response?: Response) => ({ isValid, response });
 
@@ -39,7 +39,7 @@ export const validateBody = (messagePayload: MessagePayload) => {
     return validateResult(true);
   }
 
-  if (!message?.agentId || !message?.content || !message?.toUser) {
+  if (!message?.agentid || !message?.content || !message?.touser) {
     return validateResult(false, utils.responseError(`Need body in json format: ${bodyFormat}`));
   }
 

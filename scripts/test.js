@@ -4,8 +4,8 @@ const { exec } = require("child_process");
 
 const payload = JSON.stringify({
   message: {
-    "agentId": 1000001,
-    "toUser": "@all",
+    "agentid": 1000001,
+    "touser": "@all",
     "content": "test 😄🚗 🇨🇳☯️",
   },
   timestamp: Math.floor(new Date().getTime() / 1000),

@@ -11,8 +11,8 @@ import os
 
 payload = json.dumps({
   "message": {
-    "agentId": 1000001,
-    "toUser": "@all",
+    "agentid": 1000001,
+    "touser": "@all",
     "content": "test 😄🚗 🇨🇳☯️",
   },
   "timestamp": math.floor(time.time()) 

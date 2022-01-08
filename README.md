@@ -18,9 +18,9 @@ curl -L -X POST "http://127.0.0.1:8787" \
 -H "Content-Type: application/json" \
 --data-raw '{
     "message": {
-        "agentId": 1000001,
-        "toUser": "@all",
-        "message": "test"
+        "agentid": 1000001,
+        "touser": "@all",
+        "content": "test"
     },
     "timestamp": 1641224537
 }'
