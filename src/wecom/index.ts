@@ -1,8 +1,8 @@
 import { Message } from "@/types";
-import { TextLikeMessage } from "@/wecom/message";
+import { WecomMessage } from "@/wecom/message";
 import { getAccessToken, sendMessageResult } from "./utils";
 
-export const postMessage = async (message: Message) => {
+export const postMessage = async (message: Message, isCustom: boolean) => {
   const token = await getAccessToken();
   if (!token) {
     return sendMessageResult(false, "No TOKEN");
@@ -11,7 +11,7 @@ export const postMessage = async (message: Message) => {
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
-  const payload = new TextLikeMessage().toPlain(message);
+  const payload = new WecomMessage(isCustom).toPlain(message);
 
   const requestOptions = {
     method: "POST",

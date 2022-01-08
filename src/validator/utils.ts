@@ -35,6 +35,10 @@ export const validateBody = (messagePayload: MessagePayload) => {
     return validateResult(false, utils.responseError(`API-KEY is expired`, 401));
   }
 
+  if (messagePayload.isCustom) {
+    return validateResult(true);
+  }
+
   if (!message?.agentId || !message?.content || !message?.toUser) {
     return validateResult(false, utils.responseError(`Need body in json format: ${bodyFormat}`));
   }

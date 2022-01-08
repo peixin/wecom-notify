@@ -7,6 +7,7 @@ export interface Message {
 
 export interface MessagePayload {
   timestamp: number;
+  isCustom?: boolean;
   message: Message;
 }
 

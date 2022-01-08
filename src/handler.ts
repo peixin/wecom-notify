@@ -10,8 +10,8 @@ export async function handleRequest(request: Request): Promise<Response> {
     return response!;
   }
 
-  const { message } = JSON.parse(await request.text()) as MessagePayload;
-  const result = await postMessage(message);
+  const { message, isCustom } = JSON.parse(await request.text()) as MessagePayload;
+  const result = await postMessage(message, !!isCustom);
   if (result.isOK) {
     return utils.responseSuccess(`Send message result: ${result.message}`);
   } else {
