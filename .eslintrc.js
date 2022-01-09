@@ -1,3 +1,5 @@
+const globalsVars = require("./globals-vars.js");
+
 module.exports = {
   env: {
     browser: true,
@@ -7,15 +9,7 @@ module.exports = {
     jest: true,
   },
   parser: "@typescript-eslint/parser",
-  globals: {
-    "WECOM_CROP_ID": "readonly",
-    "WECOM_SECRET": "readonly",
-    "TENCENT": "readonly",
-    "SECRET_KEY": "readonly",
-    "API_KEY_EXPIRES": "readonly",
-    "CORS": "readonly",
-    "SECRET_KEY_USED_AS_API_KEY": "readonly",
-  },
+  globals: Object.fromEntries(globalsVars.map(varName => [varName, "readonly"])),
   parserOptions: {
     ecmaVersion: 12,
     sourceType: "module",

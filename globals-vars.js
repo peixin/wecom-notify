@@ -1,0 +1,10 @@
+module.exports = [
+  "WECOM_AGENT_ID",
+  "WECOM_SECRET",
+  "WECOM_CROP_ID",
+  "TENCENT",
+  "SECRET_KEY",
+  "API_KEY_EXPIRES",
+  "CORS",
+  "SECRET_KEY_USED_AS_API_KEY",
+];
